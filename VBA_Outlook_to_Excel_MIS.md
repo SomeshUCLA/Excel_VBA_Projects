@@ -3,6 +3,10 @@
 This file uses Outlook.Application object and if outlook is running, it uses outlook namespace "MAPI".
 Seaches for specified template in outlook emails and loads all such email data in tabular format in excel
 
+### Output of the exercise would look like following:
+
+![alt text](https://github.com/SomeshUCLA/Excel_VBA_Projects/blob/master/VBA_Outlook_to_Excel_MIS_files.jpg "MIS Excel Published")
+
 ### VBA Code
 
 ```
