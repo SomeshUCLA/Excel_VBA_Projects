@@ -5,21 +5,19 @@ Seaches for specified template in outlook emails and loads all such email data i
 
 ### VBA Code
 
-
+```
 
 Sub MIS()
     Application.ScreenUpdating = False
     Dim OLApp As Outlook.Application
     On Error Resume Next
-    Set OLApp = GetObject(, "Outlook.Application")
-    
+    Set OLApp = GetObject(, "Outlook.Application")    
     If Err Then
        MsgBox "Please start Microsoft Outlook before importing MIS data."
     Else
         Set objApp = Application
         Dim olns As Outlook.Namespace
         Set olns = Outlook.GetNamespace("MAPI")
-        
         Dim wkb As Excel.Workbook
         Dim wks As Excel.Worksheet
         Dim EachElement()
@@ -31,18 +29,13 @@ Sub MIS()
         rowsAdded = True
         Dim chkOverwrite As Boolean
         chkOverwrite = False
-        
         Set wkb = ThisWorkbook
         Set wks = wkb.Sheets(1)
         wks.Unprotect Password:="MIS123"
-        
-        
         rowWithData = wks.Range("A1").End(xlDown).Row
-        
         If wks.Shapes("Option Button 2").OLEFormat.Object.Value = 1 Then
             chkOverwrite = True
         End If
-        
         If chkOverwrite Or rowWithData = 0 Then
             wks.Range("A2:Q" & rowWithData + 2).ClearContents
             With wks
@@ -52,29 +45,19 @@ Sub MIS()
                 For Each outlookmessage In Outlook.Application.ActiveExplorer.Selection
                     StartCount = StartCount + 1 'increment email count
                     selectedMessageCount = selectedMessageCount + 1
-                    
                     UseCol = 1
-                    
                     FullMsg = outlookmessage.Body
                     AllLines = Split(FullMsg, vbCrLf)
-                    
                     For FullLine = LBound(AllLines) To UBound(AllLines)
                         On Error Resume Next
-        
                       'Here is where you could decide to process only certain lines
-        
-        
                         eachVal = Split(AllLines(FullLine), ",") 'for a comma delimited file
                         For EachDataPoint = LBound(eachVal) To UBound(eachVal) 'load each value to an array
                             UseCol = UseCol + 1
                             ReDim Preserve EachElement(UseCol)
                             EachElement(UseCol - 1) = eachVal(EachDataPoint)
-                            
                         Next
                     Next
-                    
-                    'Now place just the selected data into the output workbook- from the array.
-                    'Sourav
                     applicantPosition = 0
                     testFlag = False
                     For Each x In EachElement
@@ -85,9 +68,7 @@ Sub MIS()
                             End If
                             Exit For
                         End If
-                    
                     Next
-                    
                     If testFlag Then
                         wks.Cells(StartCount, 1) = StartCount - 1
                         wks.Cells(StartCount, 2) = Trim(UCase(EachElement(applicantPosition)))
@@ -103,8 +84,6 @@ Sub MIS()
                         wks.Cells(StartCount, 14) = EachElement(applicantPosition + 18)
                         wks.Cells(StartCount, 15) = Format(outlookmessage.ReceivedTime, "DD-MMM-YYYY")
                         wks.Cells(StartCount, 16).Formula = "=networkdays(N" & StartCount & ",O" & StartCount & ",)"
-        
-                        
                         If InStr(outlookmessage.Categories, "Green Category") Then
                             wks.Cells(StartCount, 17) = "A"
                         ElseIf InStr(outlookmessage.Categories, "Blue Category") Then
@@ -114,15 +93,11 @@ Sub MIS()
                         ElseIf InStr(outlookmessage.Categories, "Red Category") Then
                             wks.Cells(StartCount, 17) = "D"
                         End If
-                        
                     Else
                         StartCount = StartCount - 1
                     End If
-                    
-                    
                 Next
             End With
-            
         Else
             With wks
                 rowWithData = rowWithData - 1
@@ -132,29 +107,19 @@ Sub MIS()
                 For Each outlookmessage In Outlook.Application.ActiveExplorer.Selection
                     StartCount = StartCount + 1 'increment email count
                     selectedMessageCount = selectedMessageCount + 1
-                    
                     UseCol = 1
-                    
                     FullMsg = outlookmessage.Body
                     AllLines = Split(FullMsg, vbCrLf)
-                    
                     For FullLine = LBound(AllLines) To UBound(AllLines)
                         On Error Resume Next
-        
                       'Here is where you could decide to process only certain lines
-        
-        
                         eachVal = Split(AllLines(FullLine), ",") 'for a comma delimited file
                         For EachDataPoint = LBound(eachVal) To UBound(eachVal) 'load each value to an array
                             UseCol = UseCol + 1
                             ReDim Preserve EachElement(UseCol)
                             EachElement(UseCol - 1) = eachVal(EachDataPoint)
-                            
                         Next
                     Next
-                    
-                    'Now place just the selected data into the output workbook- from the array.
-                    'Sourav
                     applicantPosition = 0
                     testFlag = False
                     For Each x In EachElement
@@ -165,9 +130,7 @@ Sub MIS()
                             End If
                             Exit For
                         End If
-                    
                     Next
-                    
                     If testFlag Then
                         wks.Cells(StartCount + rowWithData, 1) = StartCount + rowWithData - 1
                         wks.Cells(StartCount + rowWithData, 2) = Trim(UCase(EachElement(applicantPosition)))
@@ -183,8 +146,6 @@ Sub MIS()
                         wks.Cells(StartCount + rowWithData, 14) = EachElement(applicantPosition + 18)
                         wks.Cells(StartCount + rowWithData, 15) = Format(outlookmessage.ReceivedTime, "DD-MMM-YYYY")
                         wks.Cells(StartCount + rowWithData, 16).Formula = "=networkdays(N" & StartCount + rowWithData & ",O" & StartCount + rowWithData & ",)"
-        
-                        
                         If InStr(outlookmessage.Categories, "Green Category") Then
                             wks.Cells(StartCount + rowWithData, 17) = "A"
                         ElseIf InStr(outlookmessage.Categories, "Blue Category") Then
@@ -194,30 +155,21 @@ Sub MIS()
                         ElseIf InStr(outlookmessage.Categories, "Red Category") Then
                             wks.Cells(StartCount + rowWithData, 17) = "D"
                         End If
-                        
                     Else
                         StartCount = StartCount - 1
                     End If
-                    
-                    
                 Next
-            
             End With
-        
         End If
-        
         lastRow = wks.Range("A1").End(xlDown).Row
         If lastRow <> 0 Then
             If Sheets(1).ComboBox1.Value = "No Sort" Or lastRow = 0 Then
-            
             ElseIf Sheets(1).ComboBox1.Value = "Sort all rows" Or chkOverwrite Or rowWithData = 0 Then
                 Columns("B:Q").Sort key1:=Range("O2"), key2:=Range("N2"), order1:=xlAscending, order2:=xlDescending, Header:=xlYes
             ElseIf Sheets(1).ComboBox1.Value = "Sort only imported rows" And StartCount > 2 Then
                 Range("B" & rowWithData + 1 & ":Q" & lastRow & "").Sort key1:=Range("O" & rowWithData + 1 & ":O" & lastRow & ""), key2:=Range("N" & rowWithData + 1 & ":N" & lastRow & ""), order1:=xlAscending, order2:=xlDescending, Header:=xlYes
             End If
         End If
-        
-            
         If StartCount = 1 Then
             rowsAdded = False
             If selectedMessageCount = 1 Then
@@ -225,29 +177,23 @@ Sub MIS()
             Else
                 MsgBox selectedMessageCount & " messages were selected in Outlook." & vbCrLf & "No data was imported from Outlook."
             End If
-            
         ElseIf StartCount = 2 Then
             If selectedMessageCount = 1 Then
                 MsgBox "1 message was selected in Outlook." & vbCrLf & "1 row was imported from Outlook."
             Else
                 MsgBox selectedMessageCount & " messages were selected in Outlook." & vbCrLf & "1 row was imported from Outlook."
             End If
-            
         Else
             MsgBox selectedMessageCount & " messages were selected in Outlook." & vbCrLf & "" & StartCount - 1 & " rows were imported from Outlook."
         End If
-        
-        
         Set olns = Nothing
         Set myinbox = Nothing
         Set myItems = Nothing
     End If
     Set myOlApp = Nothing
-    
     If rowsAdded Then
         RemoveDuplicates (lastRow)
-    End If
-    
+    End If    
     wks.Protect Password:="MIS123"
     Application.ScreenUpdating = True
 End Sub
@@ -280,5 +226,5 @@ Sub RemoveDuplicates(currentlastRowNumber As Integer)
     End If
 End Sub
 
-
+```
 
