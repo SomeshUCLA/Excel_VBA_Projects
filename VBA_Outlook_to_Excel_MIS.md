@@ -250,9 +250,7 @@ Sub MIS()
     
     wks.Protect Password:="MIS123"
     Application.ScreenUpdating = True
-
 End Sub
-
 Private Sub Workbook_Open()
     With Sheets(1).ComboBox1
         .Clear
@@ -281,5 +279,6 @@ Sub RemoveDuplicates(currentlastRowNumber As Integer)
         End If
     End If
 End Sub
+
 
 
