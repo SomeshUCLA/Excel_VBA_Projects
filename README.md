@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Excel VBA code to fetch Outlook email content to Excel spreadsheet
 
 You can use the [editor on GitHub](https://github.com/SomeshUCLA/Excel_VBA_Projects/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
