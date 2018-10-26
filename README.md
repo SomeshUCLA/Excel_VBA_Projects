@@ -240,6 +240,7 @@ End Sub
 
 
 
+# Project 2: Power Pivot and Power Query DashBoard
 
 ### This file has a sample of Power_pivot and Power query based Excel Dash board.
 
