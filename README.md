@@ -1,7 +1,25 @@
 # Excel_VBA_Projects
 This repository has work on Excel, VBA, Powerquery, PowerPivot etc
 
-# Project 1:
+
+
+# Project 1: Power Pivot and Power Query DashBoard
+
+### This file has a sample of Power_pivot and Power query based Excel Dash board.
+
+### Output of the exercise would look like following:
+
+![alt text](https://github.com/SomeshUCLA/Excel_VBA_Projects/blob/master/Dashboard_PowerPivot_power_query_excel.jpg "MIS Excel Published")
+
+
+Here different tabs are clickable and we can generate multiple BI reports with a few clicks. With different charts and graphs.
+These graphs and charts are also customizable.
+
+
+
+
+
+# Project 2:
 
 ## Excel VBA code to fetch Outlook email content to Excel spreadsheet
 
@@ -240,16 +258,5 @@ End Sub
 
 
 
-# Project 2: Power Pivot and Power Query DashBoard
-
-### This file has a sample of Power_pivot and Power query based Excel Dash board.
-
-### Output of the exercise would look like following:
-
-![alt text](https://github.com/SomeshUCLA/Excel_VBA_Projects/blob/master/Dashboard_PowerPivot_power_query_excel.jpg "MIS Excel Published")
-
-
-Here different tabs are clickable and we can generate multiple BI reports with a few clicks. With different charts and graphs.
-These graphs and charts are also customizable.
 
 
