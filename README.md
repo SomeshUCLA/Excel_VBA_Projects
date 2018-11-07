@@ -1,12 +1,4 @@
-# README
-
-## Excel_VBA_Projects
-
-Somesh Srivastava
-May 24th, 2014
-```
-
-## Summary
+# Excel_VBA_Projects
 This repository has work on Excel, VBA, Powerquery, PowerPivot etc
 
 
@@ -37,6 +29,7 @@ Seaches for specified template in outlook emails and loads all such email data i
 ### Output of the exercise would look like following:
 
 ![alt text](https://github.com/SomeshUCLA/Excel_VBA_Projects/blob/master/VBA_Outlook_to_Excel_MIS_files.jpg "MIS Excel Published")
+
 
 ### VBA Code
 
