@@ -1,4 +1,12 @@
-# Excel_VBA_Projects
+# README
+
+## Excel_VBA_Projects
+
+Somesh Srivastava
+May 24th, 2014
+```
+
+## Summary
 This repository has work on Excel, VBA, Powerquery, PowerPivot etc
 
 
